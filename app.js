@@ -249,6 +249,7 @@
         <button class="btn btn-danger btn-block" style="margin-top:10px" data-act="reset">Erase all data</button>
       </div>
       <p class="muted" style="font-size:.85rem;padding:0 4px">Tap an item to change its charge. Past entries keep the charge they were logged with — when you change a price you can choose to update this month's entries too.</p>
+      <p class="devlop">Developed by: PIRATENAHID</p>
     `;
   }
 

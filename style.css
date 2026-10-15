@@ -181,3 +181,8 @@ details .d-body { padding: 0 12px 12px; }
   box-shadow: 0 4px 16px var(--shadow); transition: .2s; max-width: 90vw; text-align: center;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.devlop{
+  text-align: center;
+  font-family: Poppins;
+}
