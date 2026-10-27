@@ -217,6 +217,7 @@
       <div class="btn-row" style="margin-top:16px">
         <button class="btn btn-primary" data-act="copy">Copy summary</button>
       </div>
+      <button class="btn btn-danger btn-block" style="margin-top:10px" data-act="delete-month" ${dates.length ? '' : 'disabled'}>Delete ${esc(monthLabel(state.month))} data</button>
     `;
   }
 
@@ -341,6 +342,16 @@
     }
   }
 
+  function deleteMonth() {
+    const month = state.month;
+    const days = Object.keys(data.log).filter(d => d.startsWith(month));
+    if (!days.length) return toast('Nothing to delete this month');
+    const total = money(monthTotals(month).total);
+    if (!confirm(`Delete all ${days.length} logged day${days.length === 1 ? '' : 's'} for ${monthLabel(month)} (${total})? This cannot be undone. Consider exporting a backup first.`)) return;
+    days.forEach(d => delete data.log[d]);
+    save(); render(); toast(`${monthLabel(month)} deleted`);
+  }
+
   function exportData() {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
@@ -411,6 +422,7 @@
       case 'delete-item': deleteItem(); break;
       case 'close-modal': closeModal(); break;
       case 'copy': copyText(summaryText()); break;
+      case 'delete-month': deleteMonth(); break;
       case 'export': exportData(); break;
       case 'import': $('#import-file').click(); break;
       case 'reset':
